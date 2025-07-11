@@ -1,0 +1,25 @@
+name: Scrape Yverdon News
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Exécute tous les jours à minuit UTC
+  workflow_dispatch:  # Permet un déclenchement manuel
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+      - name: Run scraper
+        run: python scraper.py
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add news.json
+          git commit -m "Mise à jour de news.json avec les dernières actualités" || echo "Aucun changement à commiter"
+          git push
