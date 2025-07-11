@@ -1,0 +1,42 @@
+openapi: 3.1.0
+info:
+  title: API Yverdon Sport Newsletter
+  version: 1.0.0
+  description: API interne simulée pour générer des newsletters du club Yverdon Sport en scrapant les actualités depuis https://www.yverdonsport.ch/news-ys/.
+servers:
+  - url: https://Teteoaa.github.io/yverdon-sport-plugin
+    description: Serveur principal hébergé sur GitHub Pages
+paths:
+  /news:
+    get:
+      summary: Récupère les dernières actualités d'Yverdon Sport
+      operationId: getNews
+      responses:
+        '200':
+          description: Liste des actualités scrapées depuis le site officiel
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  news:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                          description: Titre de l'actualité
+                          example: "YS ACCUEILLE ROBIN BUSSET DANS SES RANGS !"
+                        date:
+                          type: string
+                          description: Date de publication de l'actualité
+                          example: "2025-07-03"
+                        summary:
+                          type: string
+                          description: Résumé court de l'actualité
+                          example: "Yverdon Sport annonce l'arrivée de Robin Busset, défenseur polyvalent suisse-malgache en provenance du Stade Nyonnais."
+                        link:
+                          type: string
+                          description: Lien vers l'article complet sur le site officiel
+                          example: "https://www.yverdonsport.ch/news-ys/ys-accueille-robin-busset-dans-ses-rangs/"
