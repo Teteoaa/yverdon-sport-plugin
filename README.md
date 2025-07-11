@@ -1,0 +1,1 @@
+# yverdon-sport-plugin
